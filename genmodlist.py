@@ -34,7 +34,7 @@ def get_mod_name_from_mods_toml(file):
 
 def extract_mod_names(directory):
     for file in os.listdir(directory):
-        if file.endswith(".jar"):
+        if file.endswith(".jar") or file.endswith(".zip"):
             file_path = os.path.join(directory, file)
             mod_name = get_mod_name_from_mcmodinfo(
                 file_path
