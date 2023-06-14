@@ -32,6 +32,17 @@ def get_mod_name_from_mods_toml(file):
             pass
 
 
+def get_mod_name_from_litemod_json(file):
+    with zipfile.ZipFile(file, "r") as zip_ref:
+        try:
+            with zip_ref.open("litemod.json") as mod_info:
+                mod_data = json.load(mod_info)
+
+                return mod_data["name"]
+        except (KeyError, FileNotFoundError):
+            pass
+
+
 def extract_mod_names(directory):
     for file in os.listdir(directory):
         if file.endswith(".jar") or file.endswith(".zip"):
@@ -39,8 +50,12 @@ def extract_mod_names(directory):
             mod_name = get_mod_name_from_mcmodinfo(
                 file_path
             ) or get_mod_name_from_mods_toml(file_path)
-            if mod_name:
-                print(mod_name)
+        elif file.endswith(".litemod"):
+            file_path = os.path.join(directory, file)
+            mod_name = get_mod_name_from_litemod_json(file_path)
+
+        if mod_name:
+            print(mod_name)
 
 
 if __name__ == "__main__":
