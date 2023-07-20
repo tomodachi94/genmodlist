@@ -8,7 +8,7 @@ import argparse  # For a proper CLI
 import toml  # For mods.toml parsing
 
 
-def get_mod_name_from_mcmodinfo(file):
+def get_mod_name_from_mcmodinfo(file: str) -> str:
     with zipfile.ZipFile(file, "r") as zip_ref:
         try:
             with zip_ref.open("mcmod.info") as mod_info:
@@ -21,7 +21,7 @@ def get_mod_name_from_mcmodinfo(file):
             pass
 
 
-def get_mod_name_from_mods_toml(file):
+def get_mod_name_from_mods_toml(file: str) -> str:
     with zipfile.ZipFile(file, "r") as zip_ref:
         try:
             with zip_ref.open("META-INF/mods.toml") as mod_info:
@@ -32,7 +32,7 @@ def get_mod_name_from_mods_toml(file):
             pass
 
 
-def get_mod_name_from_litemod_json(file):
+def get_mod_name_from_litemod_json(file: str) -> str:
     with zipfile.ZipFile(file, "r") as zip_ref:
         try:
             with zip_ref.open("litemod.json") as mod_info:
@@ -43,7 +43,7 @@ def get_mod_name_from_litemod_json(file):
             pass
 
 
-def extract_mod_names(directory):
+def extract_mod_names(directory: str) -> None:
     for file in os.listdir(directory):
         if file.endswith(".jar") or file.endswith(".zip"):
             file_path = os.path.join(directory, file)
@@ -73,3 +73,4 @@ if __name__ == "__main__":
 
     args = p.parse_args()
     extract_mod_names(args.directory)
+
