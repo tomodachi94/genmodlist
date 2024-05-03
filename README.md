@@ -25,3 +25,6 @@ Use this program chained with `sed`:
 ```sh
 ./genmodlist.py -d path/to/.minecraft/mods | sed -e "s/\(.*\)/[[\1]]/"
 ```
+
+## Support
+Support for this program is provided in [the #genmodlist channel in the Tomodachi Labs Discord server](https://discord.gg/Xs3VKNJrMb),
